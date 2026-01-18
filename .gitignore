@@ -1,0 +1,7 @@
+# Ignorowanie appsettings w CarRentalApp
+CarRentalApp/appsettings.json
+CarRentalApp/appsettings.Development.json
+
+# Typowe katalogi buildów dla .NET
+CarRentalApp/bin/
+CarRentalApp/obj/
