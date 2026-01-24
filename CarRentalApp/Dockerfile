@@ -1,15 +1,17 @@
+# Stage 1: Build
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
-WORKDIR /src
-COPY ["CarRentalApp/CarRentalApp.csproj", "CarRentalApp/"]
-RUN dotnet restore "CarRentalApp/CarRentalApp.csproj"
-COPY . .
-WORKDIR "/src/CarRentalApp"
-RUN dotnet build "CarRentalApp.csproj" -c Release -o /app/build
+WORKDIR /app
 
-FROM build AS publish
-RUN dotnet publish "CarRentalApp.csproj" -c Release -o /app/publish
+# Kopiujemy plik projektu z tego samego folderu, w którym jest Dockerfile
+COPY *.csproj ./
+RUN dotnet restore
 
+# Kopiujemy resztę plików i budujemy
+COPY . ./
+RUN dotnet publish -c Release -o out
+
+# Stage 2: Run
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=build /app/out .
 ENTRYPOINT ["dotnet", "CarRentalApp.dll"]

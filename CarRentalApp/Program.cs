@@ -17,6 +17,9 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<AppDbContext>(); // Pobierz kontekst bazy
+    context.Database.EnsureCreated(); // To stworzy bazę i tabele, jeśli ich nie ma
+
     await CarRentalApp.Models.TworzenieAdmina.InicjalizujRole(services);
     await CarRentalApp.Models.TworzenieAdmina.InicjalizujKategorie(services);
 }
