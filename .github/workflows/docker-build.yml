@@ -18,7 +18,7 @@ jobs:
     - name: Build Docker Image
       uses: docker/build-push-action@v5
       with:
-        context: .
+        context: ./CarRentalApp  
         file: CarRentalApp/Dockerfile
-        push: false  # Tylko sprawdzamy czy się buduje
+        push: false
         tags: car-rental-app:latest
