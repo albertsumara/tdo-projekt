@@ -31,14 +31,20 @@
                 <span asp-validation-for="EndDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Zapisz" class="btn btn-primary" />
+                <input type="submit" value="Zapisz" class="btn btn-primary" /> |
+
+                @if (User.IsInRole("User"))
+                {
+                    <a asp-controller="Reservation" asp-action="MyReservations" class="btn btn-secondary">Powrót</a>
+                }
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-action="Index" class="btn btn-secondary">Powrót</a>
+                }
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Powrót</a>
 </div>
 
 @section Scripts {

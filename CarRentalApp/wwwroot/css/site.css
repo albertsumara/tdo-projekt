@@ -19,15 +19,19 @@ html {
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
+h1 {
+    text-align: center;
+    margin: 20px 0 30px 0;
+    font-size: 60px;
+/*    -webkit-text-stroke: 3px black;*/
+    font-weight: bold;
+}
+
 body {
     min-height: 100vh;
-/*    padding-top: 20px;*/
     background: linear-gradient( 135deg, #0f396e 0%, #2a103b 60%, #0f0f1a 100% );
-    /*    margin-bottom: 60px;*/
-
     font-family: 'Montserrat', sans-serif;
     color: white;
-    /* -webkit-text-stroke: 1px black; */
     background: linear-gradient(135deg, #0f396e 0%, #2a103b 60%, #0f0f1a 100%);
     line-height: 1.6;
 }
@@ -73,4 +77,36 @@ p, h1, h2, h3 {
 footer {
     background: linear-gradient( 135deg, #0b1f3a 0%, #1a0f2e 60%, #080814 100% );
     color: #bfc9d9;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0b1f3a 0%, #1a0f2e 60%, #080814 100%);
+    color: white;
+}
+
+.custom-table th,
+.custom-table td {
+    border-right: 1px solid rgba(255, 255, 255, 0.03);
+    padding: 1rem 2rem;
+    color: white;
+    background: transparent;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+    .custom-table th:last-child,
+    .custom-table td:last-child {
+        border-right: none;
+    }
+
+.custom-table th {
+    font-size: 22px
+}
+
+.custom-table tr {
+    height: 60px;
 }

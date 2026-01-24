@@ -6,13 +6,15 @@
 
 <h1>Stwórz rezerwację:</h1>
 
-<h4>Rezerwacja</h4>
-<hr />
+@* <h4>Rezerwacja</h4>
+<hr /> *@
 
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div id="reservationError" class="text-danger mb-2"></div>
+
 
             <!-- Wybór samochodu -->
             <div class="form-group">
@@ -46,13 +48,26 @@
                 <span asp-validation-for="EndDate" class="text-danger"></span>
             </div>
 
+
+
             <input type="submit" value="Rezerwuj" class="btn btn-primary" />
+            <a asp-controller="Car" asp-action="Index" class="btn btn-secondary">Powrót</a>
+
+
+
+            @* @if (User.IsInRole("User"))
+            {
+                    <a asp-controller="Reservation" asp-action="MyReservations" class="btn btn-secondary">Powrót</a>
+            }
+
+            @if (User.IsInRole("Admin"))
+            {
+                <a asp-action="Index" class="btn btn-secondary">Powrót</a>
+            } *@
+
+            
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Powrót</a>
 </div>
 
 @section Scripts {
@@ -60,8 +75,6 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
-    <!-- Przekazanie danych z C# do JS -->
     <script>
         window.blockedDates = @Html.Raw(
                     System.Text.Json.JsonSerializer.Serialize(

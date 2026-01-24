@@ -6,58 +6,61 @@
 
 <h1>Nasze samochody@(ViewBag.CategoryName != null ? " typu " + ViewBag.CategoryName : ""):</h1>
 
-@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-{
-    <p><a asp-action="Create">Dodaj nowy samochód.</a></p>
-}
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Marka:
-            </th>
-            <th>
-                Model:
-            </th>
-            <th>
-                Rok produkcji:
-            </th>
-            <th>
-                Cena za dzień:
-            </th>
-            <th>
-                Typ pojazdu:
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Make)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Model)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Year)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PricePerDay)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CarCategory.Name)
-            </td>
-            <td>
-                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-                    {
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a>
-                        <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
-                    }
-                <a asp-action="Details" asp-route-id="@item.Id">Informacje</a> 
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="row justify-content-center">
+    <table class="custom-table">
+        <thead>
+            <tr>
+                <th>
+                    Marka:
+                </th>
+                <th>
+                    Model:
+                </th>
+                <th>
+                    Rok produkcji:
+                </th>
+                <th>
+                    Cena za dzień:
+                </th>
+                <th>
+                    Typ pojazdu:
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Make)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PricePerDay)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarCategory.Name)
+                </td>
+                <td>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            @* <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> *@
+                            <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+                            @:|
+                        }
+                    <a asp-action="Details" asp-route-id="@item.Id">Informacje</a> 
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        <p><a asp-action="Create" class="btn btn-primary">Dodaj nowy samochód.</a></p>
+    }
+</div>

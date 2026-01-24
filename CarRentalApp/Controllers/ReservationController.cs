@@ -227,6 +227,48 @@ namespace CarRentalApp.Controllers
             }
         }
 
+        [Authorize(Roles = "User")]
+        public async Task<IActionResult> Cancel(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var reservation = await _context.Reservations
+                .Include(r => r.Car)
+                .Include(r => r.User)
+                .FirstOrDefaultAsync(r => r.Id == id && r.User.UserName == User.Identity.Name);
+
+            if (reservation == null)
+                return NotFound();
+
+            return View(reservation);
+        }
+
+        [HttpPost, ActionName("Cancel")]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "User")]
+        public async Task<IActionResult> CancelConfirmed(int id)
+        {
+            var reservation = await _context.Reservations
+                .Include(r => r.User)
+                .FirstOrDefaultAsync(r => r.Id == id && r.User.UserName == User.Identity.Name);
+
+            if (reservation == null)
+                return NotFound();
+
+            try
+            {
+                _context.Reservations.Remove(reservation);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("MyReservations");
+            }
+            catch
+            {
+                return View(reservation);
+            }
+        }
+
+
         [HttpGet]
         public IActionResult NotLogged()
         {

@@ -1,15 +1,15 @@
 ﻿@model CarRentalApp.Models.Reservation
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Cancel";
 }
 
-<h1>Do usunięcia:</h1>
+<h1>Odwołanie rezerwacji</h1>
 
-<h3>Czy na pewno chcesz usunąć ten element?</h3>
+<h3>Czy na pewno chcesz anulować rezerwację?</h3>
 <div>
-    <h4>Rezerwacja</h4>
-    <hr />
+    @* <h4>Rezerwacja</h4>
+    <hr /> *@
     <dl class="row">
         <dt class="col-sm-2">Samochód:</dt>
         <dd class="col-sm-10">
@@ -19,23 +19,23 @@
         <dd class="col-sm-10">
             @Model.User.FirstName @Model.User.LastName (@Model.User.Email)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             Od kiedy:
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.StartDate)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             Do kiedy:
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.EndDate)
         </dd>
     </dl>
-    
-    <form asp-action="Delete">
+
+    <form asp-action="Cancel">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Usuń" class="btn btn-danger" /> |
-        <a asp-action="Index" class="btn btn-secondary">Powrót</a>
+        <input type="submit" value="Anuluj" class="btn btn-danger" /> |
+        <a asp-controller="Reservation" asp-action="MyReservations" class="btn btn-secondary">Powrót</a>
     </form>
 </div>

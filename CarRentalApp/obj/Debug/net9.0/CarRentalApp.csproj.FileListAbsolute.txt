@@ -830,8 +830,6 @@ C:\Users\Michal\Source\Repos\BazaDanychProjekt\CarRentalApp\obj\Debug\net9.0\ref
 C:\Users\Michal\Source\Repos\BazaDanychProjekt\CarRentalApp\obj\Debug\net9.0\CarRentalApp.pdb
 C:\Users\Michal\Source\Repos\BazaDanychProjekt\CarRentalApp\obj\Debug\net9.0\CarRentalApp.genruntimeconfig.cache
 C:\Users\Michal\Source\Repos\BazaDanychProjekt\CarRentalApp\obj\Debug\net9.0\ref\CarRentalApp.dll
-C:\Users\Albert\source\repos\TDO-projekt\CarRentalApp\bin\Debug\net9.0\appsettings.Development.json
-C:\Users\Albert\source\repos\TDO-projekt\CarRentalApp\bin\Debug\net9.0\appsettings.json
 C:\Users\Albert\source\repos\TDO-projekt\CarRentalApp\bin\Debug\net9.0\CarRentalApp.staticwebassets.runtime.json
 C:\Users\Albert\source\repos\TDO-projekt\CarRentalApp\bin\Debug\net9.0\CarRentalApp.staticwebassets.endpoints.json
 C:\Users\Albert\source\repos\TDO-projekt\CarRentalApp\bin\Debug\net9.0\CarRentalApp.exe
@@ -1246,8 +1244,9 @@ C:\Users\Albert\source\repos\TDO-projekt\CarRentalApp\obj\Debug\net9.0\compresse
 C:\Users\Albert\source\repos\TDO-projekt\CarRentalApp\obj\Debug\net9.0\compressed\qwtz9c7xcm-{0}-l7rouw1fq6-l7rouw1fq6.gz
 C:\Users\Albert\source\repos\TDO-projekt\CarRentalApp\obj\Debug\net9.0\swae.build.ex.cache
 C:\Users\Albert\source\repos\TDO-projekt\CarRentalApp\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
-C:\Users\Albert\source\repos\TDO-projekt\CarRentalApp\obj\Debug\net9.0\compressed\ecw9iwuzhx-{0}-757rk54ion-757rk54ion.gz
-C:\Users\Albert\source\repos\TDO-projekt\CarRentalApp\obj\Debug\net9.0\compressed\qnoth38ao6-{0}-wnhht7f9qm-wnhht7f9qm.gz
 C:\Users\Albert\source\repos\TDO-projekt\CarRentalApp\obj\Debug\net9.0\compressed\msu14isw4l-{0}-ojbky0jupo-ojbky0jupo.gz
-C:\Users\Albert\source\repos\TDO-projekt\CarRentalApp\obj\Debug\net9.0\compressed\nurrnpv6d1-{0}-xbwotayw1i-xbwotayw1i.gz
-C:\Users\Albert\source\repos\TDO-projekt\CarRentalApp\obj\Debug\net9.0\compressed\vj2rhmcdjs-{0}-ccvcn6rdtd-ccvcn6rdtd.gz
+C:\Users\Albert\source\repos\TDO-projekt\CarRentalApp\bin\Debug\net9.0\appsettings.json
+C:\Users\Albert\source\repos\TDO-projekt\CarRentalApp\obj\Debug\net9.0\compressed\vj2rhmcdjs-{0}-gzxh90k7pi-gzxh90k7pi.gz
+C:\Users\Albert\source\repos\TDO-projekt\CarRentalApp\obj\Debug\net9.0\compressed\nurrnpv6d1-{0}-3rxr2nxmui-3rxr2nxmui.gz
+C:\Users\Albert\source\repos\TDO-projekt\CarRentalApp\obj\Debug\net9.0\compressed\ecw9iwuzhx-{0}-zs1tgngfph-zs1tgngfph.gz
+C:\Users\Albert\source\repos\TDO-projekt\CarRentalApp\obj\Debug\net9.0\compressed\qnoth38ao6-{0}-b8clulewro-b8clulewro.gz

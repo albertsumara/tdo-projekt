@@ -3,3 +3,9 @@
     color: white !important;
     border-radius: 50%;
 }
+
+#reservationError {
+    color: #ff6b6b;
+    font-weight: bold;
+    margin-top: 5px;
+}

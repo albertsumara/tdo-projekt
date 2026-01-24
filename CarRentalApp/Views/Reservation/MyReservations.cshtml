@@ -6,7 +6,7 @@
 
 <h1>Moje Rezerwacje</h1>
 
-<table class="table">
+<table class="custom-table">
     <thead>
         <tr>
             <th>Samochód:</th>
@@ -21,8 +21,10 @@
             <td>@item.Car.Make @item.Car.Model</td>
             <td>@item.StartDate.ToShortDateString()</td>
             <td>@item.EndDate.ToShortDateString()</td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a>
+                <td style="text-align: center;">
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Informacje</a> |
+                    <a asp-action="Cancel" asp-route-id="@item.Id" class="btn btn-warning">Anuluj</a>
+
             </td>
         </tr>
 }

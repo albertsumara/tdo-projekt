@@ -4,12 +4,12 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Strona główna</h1>
+<h1>Rezerwacje użytkowników:</h1>
 
-<p>
+@* <p>
     <a asp-action="Create">Dodaj nową rezerwację.</a>
-</p>
-<table class="table">
+</p> *@
+<table class="custom-table">
     <thead>
         <tr>
             <th>
@@ -51,8 +51,9 @@
             <td>
                 @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                 {
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> 
+                    @* <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a>  *@
                     <a asp-action= "Details" asp-route-id = "@item.Id" >Informacje</a> 
+                    @:|
                     <a asp-action = "Delete" asp-route-id = "@item.Id" >Usuń</a>
                 }
             </td>

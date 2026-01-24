@@ -7,8 +7,8 @@
 <h1>Informacje o samochodzie.</h1>
 
 <div>
-    <h4>Samochody.</h4>
-    <hr />
+    @* <h4>Samochody.</h4> *@
+    @* <hr /> *@
     <dl class="row">
         <dt class="col-sm-2">
             Marka:
@@ -49,12 +49,14 @@
         <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">Edytuj</a>
     }
 
-    <a asp-action="Index" class="btn btn-secondary">Powrót</a>
+    
 
     <a asp-controller="Reservation" asp-action="Create"
        asp-route-carId="@Model.Id"
        class="btn btn-primary">
         Sprawdź dostępność
     </a>
+
+    <a asp-action="Index" class="btn btn-secondary">Powrót</a>
 
 </div>
