@@ -46,4 +46,3 @@ app.MapMetrics();
 app.MapRazorPages();
 
 app.Run();
-app.Run();
