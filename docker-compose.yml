@@ -51,6 +51,9 @@ services:
     image: grafana/grafana:10.3.1
     ports:
       - "3000:3000"
+     volumes:
+      - grafana-data:/var/lib/grafana
 
 volumes:
   mssqldata:
+  grafana-data:
