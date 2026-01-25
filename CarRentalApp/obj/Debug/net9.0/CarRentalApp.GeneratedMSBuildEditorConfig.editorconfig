@@ -19,141 +19,141 @@ build_property.TargetFrameworkIdentifier = .NETCoreApp
 build_property.TargetFrameworkVersion = v9.0
 build_property.RootNamespace = CarRentalApp
 build_property.RootNamespace = CarRentalApp
-build_property.ProjectDir = C:\Users\Albert\source\repos\TDO-projekt\CarRentalApp\
+build_property.ProjectDir = D:\tmp2\a\TDO-projekt\CarRentalApp\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Albert\source\repos\TDO-projekt\CarRentalApp
+build_property.MSBuildProjectDirectory = D:\tmp2\a\TDO-projekt\CarRentalApp
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Areas/Identity/Pages/Account/Login.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Areas/Identity/Pages/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Areas/Identity/Pages/Account/Logout.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Areas/Identity/Pages/Account/Logout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Areas/Identity/Pages/Account/Register.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Areas/Identity/Pages/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Areas/Identity/Pages/Account/_ViewImports.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Areas/Identity/Pages/Account/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfVmlld0ltcG9ydHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Areas/Identity/Pages/_ViewImports.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Areas/Identity/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Areas/Identity/Pages/_ViewStart.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Areas/Identity/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Views/CarCategory/Create.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Views/CarCategory/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FyQ2F0ZWdvcnlcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Views/CarCategory/Delete.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Views/CarCategory/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FyQ2F0ZWdvcnlcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Views/CarCategory/Details.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Views/CarCategory/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FyQ2F0ZWdvcnlcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Views/CarCategory/Edit.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Views/CarCategory/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FyQ2F0ZWdvcnlcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Views/CarCategory/Index.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Views/CarCategory/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FyQ2F0ZWdvcnlcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Views/Car/Create.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Views/Car/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FyXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Views/Car/Delete.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Views/Car/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FyXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Views/Car/Details.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Views/Car/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FyXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Views/Car/Edit.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Views/Car/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FyXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Views/Car/Index.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Views/Car/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FyXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Views/Home/Index.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Views/Home/Privacy.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Views/Reservation/Cancel.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Views/Reservation/Cancel.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cQ2FuY2VsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Views/Reservation/Create.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Views/Reservation/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Views/Reservation/Delete.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Views/Reservation/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Views/Reservation/Details.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Views/Reservation/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Views/Reservation/Edit.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Views/Reservation/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Views/Reservation/Index.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Views/Reservation/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Views/Reservation/MyReservations.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Views/Reservation/MyReservations.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cTXlSZXNlcnZhdGlvbnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Views/Shared/Error.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Views/Shared/_LoginPartial.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Views/_ViewImports.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Views/_ViewStart.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Albert/source/repos/TDO-projekt/CarRentalApp/Views/Shared/_Layout.cshtml]
+[D:/tmp2/a/TDO-projekt/CarRentalApp/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-e9za9i4z5v
