@@ -1,0 +1,11 @@
+groups:
+- name: application_rules
+  rules:
+  - alert: HighRequestLoad
+    expr: rate(http_requests_received_total[1m]) > 5
+    for: 10s
+    labels:
+      severity: warning
+    annotations:
+      summary: "Duże obciążenie aplikacji"
+      description: "Wykryto ponad 5 zapytań na sekundę. Obecna wartość: {{ $value }}"
