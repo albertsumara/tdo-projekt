@@ -3,7 +3,7 @@ name: Release Docker Image
 on:
   push:
     tags:
-      - 'v*' # Uruchamiaj tylko dla tagów zaczynających się na 'v' (np. v1.0)
+      - 'v*' # Uruchamia się dla tagów v1.0, v1.0.1 itd.
 
 jobs:
   push_to_registry:
@@ -27,9 +27,10 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./Dockerfile
+          # Ścieżka do Twojego Dockerfile
+          file: ./CarRentalApp/Dockerfile 
           push: true
-          # Tutaj dzieje się wersjonowanie:
+          # Nazwy tagów wpisane małymi literami (wymóg Dockera/GHCR)
           tags: |
-            ghcr.io/${{ github.repository }}:latest
-            ghcr.io/${{ github.repository }}:${{ github.ref_name }}
+            ghcr.io/albertsumaral4/tdo-projekt:latest
+            ghcr.io/albertsumaral4/tdo-projekt:${{ github.ref_name }}
