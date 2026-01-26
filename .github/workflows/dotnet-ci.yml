@@ -7,12 +7,13 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
@@ -21,5 +22,11 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
 
-    - name: Build
-      run: dotnet build --no-restore
+    - name: Build project
+      run: dotnet build --no-restore --configuration Release
+
+    - name: Run Linter and Fix Formatting
+      run: dotnet format CarRentalApp.sln
+
+    - name: Run Tests
+      run: dotnet test --no-build --verbosity normal
