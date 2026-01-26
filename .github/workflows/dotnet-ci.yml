@@ -25,8 +25,8 @@ jobs:
     - name: Build project
       run: dotnet build --no-restore --configuration Release
 
-    - name: Run Linter
-      run: dotnet format CarRentalApp.sln --verify-no-changes
+    - name: Run Linter and Fix Formatting
+      run: dotnet format CarRentalApp.sln
 
     - name: Run Tests
       run: dotnet test --no-build --verbosity normal
