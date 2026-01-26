@@ -12,8 +12,7 @@ namespace CarRentalApp.Models
         [Required]
         public int CarId { get; set; }
 
-        [ValidateNever]
-        public Car Car { get; set; }
+        public Car? Car { get; set; }
 
         [Required, DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
@@ -21,10 +20,9 @@ namespace CarRentalApp.Models
         [Required, DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
 
-        [ValidateNever]
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
 
-        [ValidateNever]
-        public ApplicationUser User { get; set; }
+        public ApplicationUser? User { get; set; }
     }
+
 }

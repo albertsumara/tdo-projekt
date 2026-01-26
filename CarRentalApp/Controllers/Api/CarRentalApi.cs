@@ -20,7 +20,7 @@ namespace CarRentalApp.Controllers.Api
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Car>>> GetCars()
         {
-            return await _context.Car
+            return await _context.Cars
                 .Include(c => c.CarCategory)
                 .ToListAsync();
         }
@@ -28,7 +28,7 @@ namespace CarRentalApp.Controllers.Api
         [HttpGet("{id}")]
         public async Task<ActionResult<Car>> GetCar(int id)
         {
-            var car = await _context.Car
+            var car = await _context.Cars
                 .Include(c => c.CarCategory)
                 .FirstOrDefaultAsync(c => c.Id == id);
 
@@ -42,7 +42,7 @@ namespace CarRentalApp.Controllers.Api
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Car>> PostCar(Car car)
         {
-            _context.Car.Add(car);
+            _context.Cars.Add(car);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetCar), new { id = car.Id }, car);
@@ -65,11 +65,11 @@ namespace CarRentalApp.Controllers.Api
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteCar(int id)
         {
-            var car = await _context.Car.FindAsync(id);
+            var car = await _context.Cars.FindAsync(id);
             if (car == null)
                 return NotFound();
 
-            _context.Car.Remove(car);
+            _context.Cars.Remove(car);
             await _context.SaveChangesAsync();
 
             return NoContent();

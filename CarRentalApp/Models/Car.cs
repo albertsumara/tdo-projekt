@@ -9,10 +9,10 @@ namespace CarRentalApp.Models
         public int Id { get; set; }
 
         [Required, StringLength(50)]
-        public string Make { get; set; }
+        public string Make { get; set; } = string.Empty;
 
         [Required, StringLength(50)]
-        public string Model { get; set; }
+        public string Model { get; set; } = string.Empty;
 
         [Range(1900, 2100)]
         public int Year { get; set; }
@@ -21,12 +21,11 @@ namespace CarRentalApp.Models
         public int PricePerDay { get; set; }
 
         public int CarCategoryId { get; set; }
-        public CarCategory CarCategory { get; set; }
+        public CarCategory? CarCategory { get; set; }
 
-        public ICollection<Reservation> Reservations { get; set; }
+        public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
 
         [NotMapped]
-        public string FullName =>
-        $"{Make} {Model} ({Year}) – {PricePerDay} zł/dzień";
+        public string FullName => $"{Make} {Model} ({Year}) – {PricePerDay} zł/dzień";
     }
 }

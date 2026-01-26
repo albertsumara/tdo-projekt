@@ -11,16 +11,13 @@ namespace CarRentalApp.Areas.Identity.Data;
 // Add profile data for application users by adding properties to the ApplicationUser class
 public class ApplicationUser : IdentityUser
 {
-    //public int Id { get; set; }
+    [Required, StringLength(50, MinimumLength = 2)]
+    public string FirstName { get; set; } = string.Empty;
 
     [Required, StringLength(50, MinimumLength = 2)]
-    public string FirstName { get; set; }
-
-    [Required, StringLength(50, MinimumLength = 2)]
-    public string LastName { get; set; }
+    public string LastName { get; set; } = string.Empty;
 
     public bool IsAdmin { get; set; } = false;
 
-    public ICollection<Reservation> Reservations { get; set; }
+    public virtual ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
 }
-

@@ -16,7 +16,7 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
         base.OnModelCreating(builder);
     }
 
-    public DbSet<Car> Car { get; set; } = default!;
+    public DbSet<Car> Cars { get; set; } = default!;
     public DbSet<CarCategory> CarCategories { get; set; } = default!;
     public DbSet<Reservation> Reservations { get; set; } = default!;
 }

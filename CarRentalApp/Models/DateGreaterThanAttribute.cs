@@ -13,8 +13,12 @@ namespace CarRentalApp.Models
             _comparisonProperty = comparisonProperty;
         }
 
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
+            // Jeśli brak instancji obiektu (np. podczas EF Core design-time), pomijamy walidację
+            if (validationContext.ObjectInstance == null)
+                return ValidationResult.Success;
+
             var currentValue = value as DateTime?;
             if (currentValue == null)
                 return ValidationResult.Success;
@@ -25,7 +29,7 @@ namespace CarRentalApp.Models
 
             var comparisonValue = property.GetValue(validationContext.ObjectInstance) as DateTime?;
             if (comparisonValue == null)
-                return ValidationResult.Success; 
+                return ValidationResult.Success;
 
             if (currentValue <= comparisonValue)
                 return new ValidationResult(ErrorMessage ?? $"{validationContext.DisplayName} musi być po {_comparisonProperty}");

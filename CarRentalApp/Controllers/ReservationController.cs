@@ -50,7 +50,7 @@ namespace CarRentalApp.Controllers
         [Authorize]
         public IActionResult Create(int? carId)
         {
-            ViewBag.Cars = new SelectList(_context.Car.ToList(), "Id", "FullName");
+            ViewBag.Cars = new SelectList(_context.Cars.ToList(), "Id", "FullName");
 
             List<string> blockedDates = new List<string>();
 
@@ -101,7 +101,7 @@ namespace CarRentalApp.Controllers
 
             if (!ModelState.IsValid)
             {
-                ViewBag.Cars = new SelectList(_context.Car.ToList(), "Id", "FullName", model.CarId);
+                ViewBag.Cars = new SelectList(_context.Cars.ToList(), "Id", "FullName", model.CarId);
 
                 List<string> blockedDates = new List<string>();
                 foreach (var r in existingReservations)
@@ -113,6 +113,9 @@ namespace CarRentalApp.Controllers
 
                 return View(model);
             }
+
+            model.StartDate = model.StartDate.ToUniversalTime();
+            model.EndDate = model.EndDate.ToUniversalTime();
 
             _context.Reservations.Add(model);
             _context.SaveChanges();
@@ -144,7 +147,7 @@ namespace CarRentalApp.Controllers
                 return NotFound();
 
             ViewBag.Cars = new SelectList(
-                _context.Car.ToList(),
+                _context.Cars.ToList(),
                 "Id",
                 "FullName",
                 reservation.CarId
@@ -176,6 +179,9 @@ namespace CarRentalApp.Controllers
             {
                 try
                 {
+                    reservation.StartDate = reservation.StartDate.ToUniversalTime();
+                    reservation.EndDate = reservation.EndDate.ToUniversalTime();
+
                     _context.Update(reservation);
                     await _context.SaveChangesAsync();
                 }

@@ -1,4 +1,25 @@
-Collage project.
-Group has three students that are eager to learn cs.
+Projekt TDO.
 
-/*Test commit na main.*/
+Opis:
+System służący do zarządzania systemem rezerwacji samochodów.
+
+Funkcjonalności:
+- zarządzanie flotą samochodów.
+- rejestracja i logowanie użytkownika.
+- wypożyczanie samochodów.
+
+Wymagania sprzętowe:
+- środowisko programistyczne: Visual Studio 2022 (z zainstalowanym workloadem "ASP.NET and web development").
+- platforma: .NET SDK 9.0.
+- baza danych: Microsoft SQL Server Express LocalDB (instalowana domyślnie z Visual Studio).
+
+Instrukcja uruchomienia:
+
+- uruchom plik CarRentalApp.sln.
+- zaktualizuj ścieżkę do bazy danych w pliku appsettings.json.
+- w konsoli menadżerów pakietów wpisz: update-database.
+- następnie uruchom projekt za pomocą przycisku "Start" lub klawisza F5.
+
+Login do administratora: 
+- email: admin@admin.pl
+- hasło: !Admin123

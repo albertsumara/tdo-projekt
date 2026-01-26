@@ -1,6 +1,7 @@
 ﻿using CarRentalApp.Areas.Identity.Data;
 using CarRentalApp.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace CarRentalApp.Data
 {
@@ -9,12 +10,14 @@ namespace CarRentalApp.Data
         public static async Task Initialize(IServiceProvider serviceProvider)
         {
 
+            var context = serviceProvider.GetRequiredService<AppDbContext>();
+            //await context.Database.MigrateAsync();
+
+
             await TworzenieAdmina.InicjalizujRole(serviceProvider);
-
-
             await TworzenieAdmina.InicjalizujKategorie(serviceProvider);
 
-            var context = serviceProvider.GetRequiredService<AppDbContext>();
+            //var context = serviceProvider.GetRequiredService<AppDbContext>();
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
 
@@ -38,7 +41,7 @@ namespace CarRentalApp.Data
             }
 
 
-            if (!context.Car.Any())
+            if (!context.Cars.Any())
             {
                 var sedanCategory = context.CarCategories.First(c => c.Name == "Sedan");
                 var suvCategory = context.CarCategories.First(c => c.Name == "SUV");
@@ -46,7 +49,7 @@ namespace CarRentalApp.Data
                 var hatchbackCategory = context.CarCategories.First(c => c.Name == "Hatchback");
                 var sportCategory = context.CarCategories.First(c => c.Name == "Sportowy");
 
-                context.Car.AddRange(
+                context.Cars.AddRange(
                     new Car { Make = "Toyota", Model = "Corolla", Year = 2020, PricePerDay = 150, CarCategoryId = sedanCategory.Id },
                     new Car { Make = "BMW", Model = "X5", Year = 2022, PricePerDay = 400, CarCategoryId = suvCategory.Id },
                     new Car { Make = "Audi", Model = "A3", Year = 2019, PricePerDay = 200, CarCategoryId = sedanCategory.Id },
@@ -63,7 +66,7 @@ namespace CarRentalApp.Data
             if (!context.Reservations.Any())
             {
                 var users = userManager.Users.ToList();
-                var cars = context.Car.ToList();
+                var cars = context.Cars.ToList();
 
                 var rnd = new Random();
                 foreach (var user in users)
@@ -74,8 +77,8 @@ namespace CarRentalApp.Data
                     {
                         CarId = car.Id,
                         UserId = user.Id,
-                        StartDate = DateTime.Today.AddDays(rnd.Next(1, 10)),
-                        EndDate = DateTime.Today.AddDays(rnd.Next(11, 20))
+                        StartDate = DateTime.SpecifyKind(DateTime.Today.AddDays(rnd.Next(1, 10)), DateTimeKind.Utc),
+                        EndDate = DateTime.SpecifyKind(DateTime.Today.AddDays(rnd.Next(11, 20)), DateTimeKind.Utc)
                     });
                 }
 
