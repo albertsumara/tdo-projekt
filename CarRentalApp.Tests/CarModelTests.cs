@@ -28,7 +28,7 @@ namespace CarRentalApp.Tests
         [Fact]
         public void Car_FullName_ShouldReturnCorrectFormat()
         {
-            var car = new Car { Make = "Toyota", Model = "Corolla", Year = 2022, PricePerDay = 150 };
+            var car = new Car { Make = "Toyota", Model - "Corolla", Year = 2022, PricePerDay = 150 };
 
             var fullName = car.FullName;
 
@@ -67,5 +67,6 @@ namespace CarRentalApp.Tests
         }
     }
 }
+
 
 
