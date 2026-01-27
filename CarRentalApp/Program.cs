@@ -5,61 +5,84 @@ using Prometheus;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("AppDbContextConnection")
-    ?? throw new InvalidOperationException("Connection string 'AppDbContextConnection' not found.");
+// Sprawdzamy, czy aplikacja działa na chmurze Render
+var isRender = Environment.GetEnvironmentVariable("RENDER") != null;
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(connectionString));
+{
+    if (isRender)
+    {
+        // Konfiguracja dla Render (Online) - używamy SQLite
+        options.UseSqlite("Data Source=carrental.db");
+    }
+    else
+    {
+        // Konfiguracja lokalna (Docker Compose) - używamy PostgreSQL
+        var connectionString = builder.Configuration.GetConnectionString("AppDbContextConnection")
+            ?? throw new InvalidOperationException("Connection string 'AppDbContextConnection' not found.");
+        options.UseNpgsql(connectionString);
+    }
+});
 
-
-
-builder.Services.AddDistributedMemoryCache(); // wymagane dla sesji w pamięci
+builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30); // czas życia sesji
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
 
-
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<IdentityRole>() .AddEntityFrameworkStores<AppDbContext>();
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<AppDbContext>();
 
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-
-
+// Automatyczne migracje i inicjalizacja bazy
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<AppDbContext>();
-    await context.Database.MigrateAsync();
-    await CarRentalApp.Data.DbInitializer.Initialize(services);
+    try 
+    {
+        var context = services.GetRequiredService<AppDbContext>();
+        if (isRender)
+        {
+            // Na SQLite używamy EnsureCreated zamiast Migrate, by uniknąć problemów z historią migracji z Postgresa
+            await context.Database.EnsureCreatedAsync();
+        }
+        else 
+        {
+            await context.Database.MigrateAsync();
+        }
+        await CarRentalApp.Data.DbInitializer.Initialize(services);
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "Wystąpił błąd podczas inicjalizacji bazy danych.");
+    }
 }
 
-
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
 app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-
-app.Urls.Add("http://0.0.0.0:8080");
-
+// Render wymaga nasłuchiwania na porcie 8080 lub pobranego z ENV
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+app.Urls.Add($"http://0.0.0.0:{port}");
 
 app.UseHttpMetrics();
-
 app.UseSession();
-
 app.MapStaticAssets();
 
 app.MapControllerRoute(
