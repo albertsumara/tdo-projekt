@@ -26,5 +26,4 @@ jobs:
       run: dotnet build --no-restore --configuration Release
 
     - name: Run Tests
-      # Ta komenda przeszuka wszystkie projekty .Tests i odpali Twoje pliki .cs
-      run: dotnet test --no-build --configuration Release --verbosity normal
+      run: dotnet test CarRentalApp.Tests/CarRentalApp.Tests.csproj --verbosity normal
