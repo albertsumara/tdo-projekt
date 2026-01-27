@@ -1,0 +1,256 @@
+name: CD - Continuous Deployment
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    tags:
+      - 'v*'
+      - 'release-*'
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  versioning:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      major: ${{ steps.version.outputs.major }}
+      minor: ${{ steps.version.outputs.minor }}
+      patch: ${{ steps.version.outputs.patch }}
+      is_release: ${{ steps.version.outputs.is_release }}
+      docker_tags: ${{ steps.version.outputs.docker_tags }}
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  
+    
+    - name: Determine version from git
+      id: version
+      run: |
+        # Get the latest tag
+        LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+        
+        # Check if current commit is tagged
+        CURRENT_TAG=$(git describe --exact-match --tags HEAD 2>/dev/null || echo "")
+        
+        # Extract version components
+        if [[ $CURRENT_TAG =~ ^v?([0-9]+)\.([0-9]+)\.([0-9]+) ]]; then
+          MAJOR="${BASH_REMATCH[1]}"
+          MINOR="${BASH_REMATCH[2]}"
+          PATCH="${BASH_REMATCH[3]}"
+          VERSION="${MAJOR}.${MINOR}.${PATCH}"
+          IS_RELEASE="true"
+        elif [[ $LATEST_TAG =~ ^v?([0-9]+)\.([0-9]+)\.([0-9]+) ]]; then
+          MAJOR="${BASH_REMATCH[1]}"
+          MINOR="${BASH_REMATCH[2]}"
+          PATCH="${BASH_REMATCH[3]}"
+          # Increment patch for dev builds
+          PATCH=$((PATCH + 1))
+          COMMIT_SHORT=$(git rev-parse --short HEAD)
+          VERSION="${MAJOR}.${MINOR}.${PATCH}-dev.${COMMIT_SHORT}"
+          IS_RELEASE="false"
+        else
+          VERSION="0.1.0-dev.$(git rev-parse --short HEAD)"
+          MAJOR="0"
+          MINOR="1"
+          PATCH="0"
+          IS_RELEASE="false"
+        fi
+        
+        echo "version=${VERSION}" >> $GITHUB_OUTPUT
+        echo "major=${MAJOR}" >> $GITHUB_OUTPUT
+        echo "minor=${MINOR}" >> $GITHUB_OUTPUT
+        echo "patch=${PATCH}" >> $GITHUB_OUTPUT
+        echo "is_release=${IS_RELEASE}" >> $GITHUB_OUTPUT
+        
+        # Generate docker tags
+        BRANCH_NAME=${GITHUB_REF#refs/heads/}
+        
+        if [[ $IS_RELEASE == "true" ]]; then
+          # Release tags: v1.2.3, v1.2, v1, latest (only for main)
+          TAGS="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${VERSION}"
+          TAGS="${TAGS},${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${MAJOR}.${MINOR}"
+          TAGS="${TAGS},${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${MAJOR}"
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            TAGS="${TAGS},${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
+          fi
+        else
+          # Development tags: branch-commit, branch-version
+          TAGS="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${BRANCH_NAME}-$(git rev-parse --short HEAD)"
+          TAGS="${TAGS},${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${BRANCH_NAME}-${VERSION}"
+        fi
+        
+        echo "docker_tags=${TAGS}" >> $GITHUB_OUTPUT
+
+    
+    - name: Create version summary
+      run: |
+        echo "## Version Information" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "- **Version:** ${{ steps.version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Major:** ${{ steps.version.outputs.major }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Minor:** ${{ steps.version.outputs.minor }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Patch:** ${{ steps.version.outputs.patch }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Is Release:** ${{ steps.version.outputs.is_release }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Docker Tags:" >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+        echo "${{ steps.version.outputs.docker_tags }}" | tr ',' '\n' >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+
+  # Job 2: Build and Test
+  build-and-test:
+    runs-on: ubuntu-latest
+    needs: versioning
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 9.0.x
+    
+    - name: Restore dependencies
+      run: dotnet restore
+    
+    - name: Build solution
+      run: dotnet build --no-restore --configuration Release /p:Version=${{ needs.versioning.outputs.version }}
+    
+    - name: Run Tests
+      run: dotnet test --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=test-results.trx" --collect:"XPlat Code Coverage"
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-results-${{ needs.versioning.outputs.version }}
+        path: |
+          **/*.trx
+          **/TestResults/**
+        if-no-files-found: warn
+
+  # Job 3: Build and Push Docker Image
+  docker-build-push:
+    runs-on: ubuntu-latest
+    needs: [versioning, build-and-test]
+    permissions:
+      contents: read
+      packages: write
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    
+    - name: Log in to Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Extract Docker metadata
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        tags: ${{ needs.versioning.outputs.docker_tags }}
+        labels: |
+          org.opencontainers.image.title=CarRentalApp
+          org.opencontainers.image.description=Car Rental Application
+          org.opencontainers.image.version=${{ needs.versioning.outputs.version }}
+          org.opencontainers.image.vendor=TDO-projekt
+    
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./CarRentalApp
+        file: ./CarRentalApp/Dockerfile
+        push: true
+        tags: ${{ needs.versioning.outputs.docker_tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        build-args: |
+          VERSION=${{ needs.versioning.outputs.version }}
+    
+    - name: Create deployment summary
+      run: |
+        echo "##  Deployment Complete" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Version:** ${{ needs.versioning.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "###  Published Images:" >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+        echo "${{ needs.versioning.outputs.docker_tags }}" | tr ',' '\n' >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "###  Pull command:" >> $GITHUB_STEP_SUMMARY
+        echo '```bash' >> $GITHUB_STEP_SUMMARY
+        echo "docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.versioning.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+
+  # Job 4: Create GitHub Release (only for version tags)
+  create-release:
+    runs-on: ubuntu-latest
+    needs: [versioning, docker-build-push]
+    if: needs.versioning.outputs.is_release == 'true'
+    permissions:
+      contents: write
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Generate changelog
+      id: changelog
+      run: |
+        PREVIOUS_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+        
+        if [[ -z "$PREVIOUS_TAG" ]]; then
+          CHANGELOG="Initial release"
+        else
+          CHANGELOG=$(git log ${PREVIOUS_TAG}..HEAD --pretty=format:"- %s (%h)" --no-merges)
+        fi
+        
+        echo "changelog<<EOF" >> $GITHUB_OUTPUT
+        echo "$CHANGELOG" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+    
+    - name: Create GitHub Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ needs.versioning.outputs.version }}
+        release_name: Release v${{ needs.versioning.outputs.version }}
+        body: |
+          ##  Release v${{ needs.versioning.outputs.version }}
+          
+          ###  Docker Images
+          ```bash
+          docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.versioning.outputs.version }}
+          ```
+          
+          ###  Changes
+          ${{ steps.changelog.outputs.changelog }}
+          
+          ###  Available Tags
+          - `${{ needs.versioning.outputs.version }}` (full version)
+          - `${{ needs.versioning.outputs.major }}.{{ needs.versioning.outputs.minor }}` (major.minor)
+          - `${{ needs.versioning.outputs.major }}` (major)
+          - `latest` (only on main branch)
+        draft: false
+        prerelease: false
