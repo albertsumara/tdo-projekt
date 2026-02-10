@@ -3,6 +3,15 @@ Projekt TDO.
 Opis:
 System służący do zarządzania systemem rezerwacji samochodów.
 
+### Project Preview
+You can try the application live here: [Car Rental App](https://car-rental-app-d56w.onrender.com)
+
+<div align="center">
+
+![Appview](assets/carrentalview.gif)
+
+</div>
+
 Funkcjonalności:
 - zarządzanie flotą samochodów.
 - rejestracja i logowanie użytkownika.
